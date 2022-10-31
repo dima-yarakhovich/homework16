@@ -174,12 +174,12 @@ public class Car {
         return brand + " " + model + ", " + year + " года выпуска, сборка в: " + country + ", " + color + " цвет кузова, объём: - " + engineVolume + " л."
                 + ", Коробка передач: " + transmission + ", Тип кузова: " + type + ", Регистрационный номер: " + number + ", Количество мест: " + seats + ", Тип резины: " + tires;
     }
+
     public void seasonTires() {
         int month = LocalDate.now().getMonthValue();
-        if(month <= 4 || month >= 10 && this.tires!="Зимние"){
+        if (month <= 4 || month >= 10 && this.tires != "Зимние") {
             System.out.println("Необходимо сменить шины на Зимние");
-        }
-        else{
+        } else {
             System.out.println("Сезонные шины установлены");
         }
     }
