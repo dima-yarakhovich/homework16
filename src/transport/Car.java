@@ -1,6 +1,9 @@
 package transport;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Car {
     private String brand;
@@ -15,8 +18,96 @@ public class Car {
     private int seats;
     private String tires;
 
+    public static class Key {
+        private String remoteEngineStart;
+        private String keylessEntry;
 
-    Car(String brand, String model, int year, String country, String color, double engineVolume, String transmission, String type, String number, int seats, String tires) {
+        Key(String remoteEngineStart, String keylessEntry) {
+            this.keylessEntry = keylessEntry;
+            this.remoteEngineStart = remoteEngineStart;
+        }
+
+        public String getRemoteEngineStart() {
+            if (remoteEngineStart.isEmpty() || remoteEngineStart == null || remoteEngineStart.isBlank()) {
+                this.remoteEngineStart = "default";
+            } else {
+                this.remoteEngineStart = remoteEngineStart;
+            }
+            return remoteEngineStart;
+        }
+
+        public String getKeylessEntry() {
+            if (keylessEntry.isEmpty() || keylessEntry == null || keylessEntry.isBlank()) {
+                this.keylessEntry = "default";
+            } else {
+                this.keylessEntry = keylessEntry;
+            }
+            return keylessEntry;
+        }
+
+    }
+    public static class Insurance {
+        private long validity;
+        private double cost;
+        private String number;
+
+        Insurance(long validity, double cost, String number) {
+            this.validity = validity;
+            this.cost = cost;
+            this.number = number;
+        }
+
+        public long getValidity() {
+            if (validity <= 0) {
+                System.out.println("Данные введены неверно");
+            } else {
+                this.validity = validity;
+            }
+            return validity;
+        }
+
+        public double getCost() {
+            if (cost <= 0) {
+                System.out.println("Данные введены неверно");
+            } else {
+                this.cost = cost;
+            }
+            return cost;
+        }
+
+        public String getNumber() {
+            if (number.isEmpty() || number == null || number.isBlank()) {
+                this.number = "default";
+            } else {
+                this.number = number;
+            }
+            return number;
+        }
+
+        public boolean activPeriod(LocalDate periodAt, long validity) {
+            long period = Duration.between(periodAt, LocalDate.now()).toDays();
+            if (period < period - validity) {
+                System.out.println("Срочно сделать страховку");
+                return false;
+            } else{
+                System.out.println("Страховка актуальна");
+                return true;
+            }
+
+        }
+
+        public void currentNumber(String number) {
+            Matcher i = Pattern.compile("\\a\\a\\a\\a\\a\\a\\a\\a\\a").matcher(number);
+            if (i.find()) {
+                System.out.println(getNumber() + " Этот номер страховки коректен.");
+            } else {
+                System.out.println(getNumber() + " Этот номер страховки не коректен.");
+            }
+        }
+    }
+
+
+        Car(String brand, String model, int year, String country, String color, double engineVolume, String transmission, String type, String number, int seats, String tires) {
         this.brand = brand;
         this.model = model;
         this.color = color;
