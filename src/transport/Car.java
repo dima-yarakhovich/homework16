@@ -45,8 +45,15 @@ public class Car {
             return keylessEntry;
         }
 
+        @Override
+        public String toString() {
+            return "Key{" +
+                    "remoteEngineStart='" + remoteEngineStart + '\'' +
+                    ", keylessEntry='" + keylessEntry + '\'' +
+                    '}';
+        }
     }
-    public static class Insurance {
+    public  class Insurance {
         private long validity;
         private double cost;
         private String number;
@@ -104,7 +111,18 @@ public class Car {
                 System.out.println(getNumber() + " Этот номер страховки не коректен.");
             }
         }
+
+        @Override
+        public String toString() {
+            return "Insurance{" +
+                    "validity=" + validity +
+                    ", cost=" + cost +
+                    ", number='" + number + '\'' +
+                    '}';
+        }
     }
+    private Key key;
+    private Insurance insurance;
 
 
         Car(String brand, String model, int year, String country, String color, double engineVolume, String transmission, String type, String number, int seats, String tires) {
@@ -120,6 +138,8 @@ public class Car {
         this.seats = seats;
         this.tires = tires;
     }
+
+
 
     public String getBrand() {
         if (brand.isEmpty() || brand == null || brand.isBlank()) {
@@ -260,10 +280,27 @@ public class Car {
         }
     }
 
+
     @Override
     public String toString() {
         return brand + " " + model + ", " + year + " года выпуска, сборка в: " + country + ", " + color + " цвет кузова, объём: - " + engineVolume + " л."
                 + ", Коробка передач: " + transmission + ", Тип кузова: " + type + ", Регистрационный номер: " + number + ", Количество мест: " + seats + ", Тип резины: " + tires;
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
     }
 
     public void seasonTires() {
